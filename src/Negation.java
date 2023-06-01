@@ -12,7 +12,7 @@ public class Negation extends Function{
      */
     @Override
     public double valueAt(double point){
-        return (-1)* this.function.valueAt(point);
+        return (-1) * this.function.valueAt(point);
     }
 
     /**

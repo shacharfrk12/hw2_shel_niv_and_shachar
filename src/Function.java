@@ -14,6 +14,9 @@ public abstract class Function {
         }
         return (right + left) / 2 ;
     }
+    public double bisectionMethod(double a, double b){
+        return bisectionMethod(a, b, epsilon);
+    }
 
     public double newtonRaphsonMethod(double a, double epsilon){
         double element = a;

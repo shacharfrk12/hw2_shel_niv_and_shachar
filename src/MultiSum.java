@@ -19,8 +19,11 @@ public class MultiSum extends Function {
     }
     @Override
     public  Function derivative(){
-        Function[] derFunc = new Function[this.funcToSum.length - 2];
         Function firstDer  = this.funcToSum[0].derivative(), secondDer = this.funcToSum[1].derivative();
+        if(this.funcToSum.length == 2)
+            return new Sum(firstDer, secondDer);
+
+        Function[] derFunc = new Function[this.funcToSum.length - 2];
         for(int i = 2; i < this.funcToSum.length; i++){
             derFunc[i] = this.funcToSum[i].derivative();
         }

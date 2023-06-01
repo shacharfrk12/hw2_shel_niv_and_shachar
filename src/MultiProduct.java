@@ -42,18 +42,23 @@ public class MultiProduct extends Function{
      * @return Function = this function's derivative
      */
     @Override
-    public Function derivative(){
+    public MultiSum derivative(){
         // derivative taking first and second functions as derivatives
-        Function[] firstSecond = new Function[2];
+        MultiProduct[] firstSecond = new MultiProduct[2];
         for (int i = 0; i < 2; i++) {
             MultiProduct currentProduct = new MultiProduct(this);
             currentProduct.functions[i] = currentProduct.functions[i].derivative();
+            firstSecond[i] = currentProduct;
         }
+        if(this.functions.length == 2)
+            return new Sum(firstSecond[0], firstSecond[1]);
+
         //derivatives with all other functions
-        Function[] sumFunctions = new Function[this.functions.length-2];
-        for (int i = 0; i < this.functions.length; i++) {
+        MultiProduct[] sumFunctions = new MultiProduct[this.functions.length-2];
+        for (int i = 2; i < this.functions.length; i++) {
             MultiProduct currentProduct = new MultiProduct(this);
             currentProduct.functions[i] = currentProduct.functions[i].derivative();
+            sumFunctions[i-2] = currentProduct;
         }
         return new MultiSum(firstSecond[0], firstSecond[1], sumFunctions);
     }

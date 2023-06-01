@@ -18,6 +18,9 @@ public class Polynomial extends Function {
     @Override
 
     public Polynomial derivative() {
+        if(Coefficients.length == 1){
+            return new Constant(0);
+        }
         double[] ad = new double[Coefficients.length - 1];
         for (int i = 0; i < Coefficients.length - 1; i++) {
             ad[i] = Coefficients[i + 1] * (i + 1);
@@ -28,6 +31,8 @@ public class Polynomial extends Function {
     @Override
     public String toString() {
         String str = "";
+        if(Coefficients.length == 0)
+            return str;
         if (Coefficients[0] != 0) {
             str += Coefficients[0];
         }
