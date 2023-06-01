@@ -9,7 +9,7 @@ public class Constant extends Polynomial{
         return this.value;
     }
     @Override
-    public  Constant derivative(){
+    public Constant derivative(){
         return new Constant(0);
     }
     @Override
