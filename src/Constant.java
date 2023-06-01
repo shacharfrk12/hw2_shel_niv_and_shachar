@@ -1,7 +1,8 @@
-public class Constant extends Function{
+public class Constant extends Polynomial{
     protected final double value;
     public Constant(double value){
-        this.value = value;
+        super(value);
+        this.value = this.Coefficients[0];
     }
     @Override
     public double valueAt(double point){
@@ -10,5 +11,14 @@ public class Constant extends Function{
     @Override
     public  Constant derivative(){
         return new Constant(0);
+    }
+    @Override
+    public Constant taylorPolynomial(int n){
+        return this;
+    }
+    @Override
+    public String toString(){
+        String str = "" + value;
+        return str;
     }
 }

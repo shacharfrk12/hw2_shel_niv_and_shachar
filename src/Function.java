@@ -47,9 +47,4 @@ public abstract class Function {
         }
         return res;
     }
-    @Override
-    public String toString(){
-
-    }
-
 }

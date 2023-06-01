@@ -4,6 +4,7 @@ public class Polynomial extends Function {
     public Polynomial(double... a) {
         this.Coefficients = a;
     }
+
     @Override
 
     public double valueAt(double point) {
@@ -13,6 +14,7 @@ public class Polynomial extends Function {
         }
         return value;
     }
+
     @Override
 
     public Polynomial derivative() {
@@ -21,5 +23,41 @@ public class Polynomial extends Function {
             ad[i] = Coefficients[i + 1] * (i + 1);
         }
         return new Polynomial(ad);
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        if (Coefficients[0] != 0) {
+            str += Coefficients[0];
+        }
+        for (int i = 1; i < this.Coefficients.length; i++) {
+            if (Coefficients[i] == 0) {
+                continue;
+            }
+            if (Coefficients[i] == 1) {
+                str += " + x^" + i;
+                continue;
+            }
+            if (Coefficients[i] == -1) {
+                str += " - x^" + i;
+                continue;
+            }
+
+            if (Coefficients[i] > 0) {
+                if (Coefficients[i] % 1 == 0) {
+                    str += " + " + (int) Coefficients[i] + "x^" + i ;
+                    continue;
+                }
+                else str += " + " + Coefficients[i] + "x^" + i ;
+            }
+            else if (Coefficients[i] % 1 == 0) {
+                str += " - " + (int) Math.abs(Coefficients[i]) + "x^" + i ;
+                continue;
+            }
+            else str += " - " + Math.abs(Coefficients[i]) + "x^" + i ;
+
+        }
+        return str;
     }
 }

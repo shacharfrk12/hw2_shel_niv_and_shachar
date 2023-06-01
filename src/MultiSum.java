@@ -27,5 +27,13 @@ public class MultiSum extends Function {
 
         return new MultiSum(firstDer, secondDer, derFunc);
     }
+    @Override
+    public String toString(){
+        String str = "" + funcToSum[0].toString();
+        for (int i = 1; i < funcToSum.length; i++) {
+            str += " + " + funcToSum[i].toString() ;
+        }
+        return str;
+    }
 }
 
