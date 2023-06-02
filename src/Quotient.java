@@ -12,7 +12,7 @@ public class Quotient extends Function{
      */
     @Override
     public  double valueAt(double point){
-        return this.numerator.valueAt(point) - this.denominator.valueAt(point);
+        return (this.numerator.valueAt(point) / this.denominator.valueAt(point));
     }
     /**
      * Calculates derivative of quotient function

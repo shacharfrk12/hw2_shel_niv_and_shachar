@@ -18,7 +18,7 @@ public class Constant extends Polynomial{
     }
     @Override
     public String toString(){
-        String str = "" + value;
+        String str = "(" + value + ")";
         return str;
     }
 }

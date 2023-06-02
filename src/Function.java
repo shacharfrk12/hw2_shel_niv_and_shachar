@@ -5,14 +5,14 @@ public abstract class Function {
     public double bisectionMethod(double a, double b, double epsilon){
         double left = a;
         double right = b;
-        while(right -left > epsilon){
-            double mid = (right + left) / 2;
-            if((this.valueAt(a) * this.valueAt(b)) < 0){
+        while(right - left > epsilon){
+            double mid = (left + right) / 2;
+            if((this.valueAt(left) * this.valueAt(mid)) > 0){
                 left = mid;
             }
             else right = mid;
         }
-        return (right + left) / 2 ;
+        return (left + right) / 2 ;
     }
     public double bisectionMethod(double a, double b){
         return bisectionMethod(a, b, epsilon);
@@ -21,8 +21,9 @@ public abstract class Function {
     public double newtonRaphsonMethod(double a, double epsilon){
         double element = a;
         double elementValue = this.valueAt(a);
-        while(Math.abs(elementValue) >  epsilon){
-            element = element - (elementValue / this.derivative().valueAt(element));
+        Function derivative = this.derivative();
+        while(Math.abs(elementValue) >=  epsilon){
+            element = element - (elementValue / derivative.valueAt(element));
             elementValue = this.valueAt(element);
         }
         return element;

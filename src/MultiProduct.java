@@ -7,8 +7,8 @@ public class MultiProduct extends Function{
         this.functions[0] = first;
         this.functions[1] = second;
         //inserting functions indexes 2 and above to the array attribute
-        for (int i = 2; i < functions.length; i++) {
-            this.functions[i] = functions[i];
+        for (int i = 2; i < functions.length + 2; i++) {
+            this.functions[i] = functions[i-2];
         }
     }
 
@@ -30,7 +30,7 @@ public class MultiProduct extends Function{
      */
     @Override
     public double valueAt(double point){
-        double value = 0;
+        double value = 1;
         for (int i = 0; i < this.functions.length; i++) {
             value *= this.functions[i].valueAt(point);
         }
@@ -47,7 +47,7 @@ public class MultiProduct extends Function{
         MultiProduct[] firstSecond = new MultiProduct[2];
         for (int i = 0; i < 2; i++) {
             MultiProduct currentProduct = new MultiProduct(this);
-            currentProduct.functions[i] = currentProduct.functions[i].derivative();
+            currentProduct.functions[i] = this.functions[i].derivative();
             firstSecond[i] = currentProduct;
         }
         if(this.functions.length == 2)
@@ -57,7 +57,7 @@ public class MultiProduct extends Function{
         MultiProduct[] sumFunctions = new MultiProduct[this.functions.length-2];
         for (int i = 2; i < this.functions.length; i++) {
             MultiProduct currentProduct = new MultiProduct(this);
-            currentProduct.functions[i] = currentProduct.functions[i].derivative();
+            currentProduct.functions[i] = this.functions[i].derivative();
             sumFunctions[i-2] = currentProduct;
         }
         return new MultiSum(firstSecond[0], firstSecond[1], sumFunctions);

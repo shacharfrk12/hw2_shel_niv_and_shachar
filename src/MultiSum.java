@@ -6,7 +6,7 @@ public class MultiSum extends Function {
         this.funcToSum[0] = first;
         this.funcToSum[1] = second;
         for (int i = 2; i < length; i++) {
-            this.funcToSum[i] = a[i];
+            this.funcToSum[i] = a[i - 2];
         }
     }
     @Override
@@ -25,7 +25,7 @@ public class MultiSum extends Function {
 
         Function[] derFunc = new Function[this.funcToSum.length - 2];
         for(int i = 2; i < this.funcToSum.length; i++){
-            derFunc[i] = this.funcToSum[i].derivative();
+            derFunc[i - 2] = this.funcToSum[i].derivative();
         }
 
         return new MultiSum(firstDer, secondDer, derFunc);
