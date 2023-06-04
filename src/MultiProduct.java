@@ -1,3 +1,5 @@
+import javax.print.attribute.standard.Finishings;
+
 public class MultiProduct extends Function{
     protected Function[] functions;
     public MultiProduct(Function first, Function second, Function...functions){
@@ -41,8 +43,7 @@ public class MultiProduct extends Function{
      * Calculates derivative of multiProduct function
      * @return Function = this function's derivative
      */
-    @Override
-    public MultiSum derivative(){
+    public MultiSum derivative2(){
         // derivative taking first and second functions as derivatives
         MultiProduct[] firstSecond = new MultiProduct[2];
         for (int i = 0; i < 2; i++) {
@@ -62,14 +63,44 @@ public class MultiProduct extends Function{
         }
         return new MultiSum(firstSecond[0], firstSecond[1], sumFunctions);
     }
+    //@Override
+    public MultiSum derivative(){
+        Function first = this.kDerivative(0);
+        Function second = this.kDerivative(1);
+        Function[] funcToSum = new Function[this.functions.length - 2];
+        for (int i = 2; i < this.functions.length; i++) {
+            funcToSum[i-2] = this.kDerivative(i);
+        }
+        return new MultiSum(first, second, funcToSum);
+    }
     @Override
     public String toString(){
         String productStr = "";
         for (int i = 0; i < this.functions.length; i++) {
-            productStr += "("+this.functions[i].toString()+")";
+            productStr += this.functions[i].toString();
             if(i<this.functions.length-1)
                 productStr += " * ";
         }
-        return productStr;
+        return "(" + productStr + ")";
+    }
+
+    private MultiProduct kDerivative(int k){
+        int startSame = 0;
+        Function second = this.functions[0];
+        Function derivativeFunc = this.functions[k].derivative();
+        Function[] newFunctions = new Function[functions.length-2];
+        if(k == 0){
+            second = this.functions[1];
+        }
+        else if (k>=2){
+            for(int i = 0; i <= k - 2;i++){
+                newFunctions[i] = this.functions[i+1];
+            }
+            startSame = k-1;
+        }
+        for(int i = startSame; i < newFunctions.length; i++){
+            newFunctions[i] = this.functions[i+2];
+        }
+        return new MultiProduct(derivativeFunc, second, newFunctions);
     }
 }

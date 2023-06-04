@@ -19,7 +19,7 @@ public class Difference extends Function{
      */
     @Override
     public Function derivative(){
-        return  new Sum(this.firstFunc ,new Negation(this.secondFunc)).derivative();
+        return new Difference(this.firstFunc.derivative() ,secondFunc.derivative());
     }
     @Override
     public String toString(){

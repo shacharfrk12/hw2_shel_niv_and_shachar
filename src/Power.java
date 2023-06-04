@@ -28,6 +28,6 @@ public class Power extends Function{
     }
     @Override
     public String toString(){
-        return ("((" + this.function.toString() + ")^" + this.power + ")");
+        return ("(" + this.function.toString() + "^" + this.power + ")");
     }
 }

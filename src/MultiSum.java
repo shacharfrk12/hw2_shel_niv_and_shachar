@@ -15,7 +15,7 @@ public class MultiSum extends Function {
         for(int i = 2 ; i < this.funcToSum.length; i++){
             value += this.funcToSum[i].valueAt(point);
         }
-        return value + funcToSum[0].valueAt(point) + funcToSum[1].valueAt(point);
+        return funcToSum[0].valueAt(point) + funcToSum[1].valueAt(point) + value;
     }
     @Override
     public  Function derivative(){
@@ -32,11 +32,11 @@ public class MultiSum extends Function {
     }
     @Override
     public String toString(){
-        String str = "" + funcToSum[0].toString();
+        String str = "(" + funcToSum[0].toString();
         for (int i = 1; i < funcToSum.length; i++) {
             str += " + " + funcToSum[i].toString() ;
         }
-        return str;
+        return str + ")";
     }
 }
 

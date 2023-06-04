@@ -32,13 +32,14 @@ public abstract class Function {
         return newtonRaphsonMethod(a, epsilon);
     }
     public Polynomial taylorPolynomial(int n){
-        double[] taylor = new double[n] ;
+        double[] taylor = new double[n + 1] ;
         double currValue = this.valueAt(0) ;
         Function derivFunc = this;
-        for(int i = 0 ; i < n; i++){
+        for(int i = 0 ; i <= n; i++){
             taylor[i] = (currValue/factorial(i));
             currValue = derivFunc.derivative().valueAt(0);
             derivFunc = derivFunc.derivative();
+
         }
         return new Polynomial(taylor);
     }
@@ -46,7 +47,7 @@ public abstract class Function {
         if(n == 0)
             return 1;
         int res = 1;
-        for(int i = 1; i <= n; i ++ ){
+        for(int i = 1; i <= n; i++){
             res *= i;
         }
         return res;

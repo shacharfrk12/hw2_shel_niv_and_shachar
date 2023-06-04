@@ -26,6 +26,6 @@ public class Negation extends Function{
 
     @Override
     public String toString(){
-        return "(-" + this.function.toString();
+        return "(-" + this.function.toString() + ")";
     }
 }

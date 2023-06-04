@@ -22,8 +22,8 @@ public class Quotient extends Function{
     public Function derivative(){
         // new numerator = numerator derivative * denominator - numerator * (denominator derivative)
         // new denominator = denominator power of 2
-        Function newNumerator = new Sum(new Product(this.numerator.derivative(), this.denominator),
-                new Negation(new Product(this.numerator, this.denominator.derivative())));
+        Function newNumerator = new Difference(new Product(this.numerator.derivative(), this.denominator),
+                new Product(this.denominator.derivative(), this.numerator));
         Function newDenominator = new Power(this.denominator, 2);
         return new Quotient(newNumerator, newDenominator);
     }
