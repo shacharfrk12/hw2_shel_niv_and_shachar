@@ -1,5 +1,3 @@
-import javax.print.attribute.standard.Finishings;
-
 public class MultiProduct extends Function{
     protected Function[] functions;
     public MultiProduct(Function first, Function second, Function...functions){
@@ -27,8 +25,8 @@ public class MultiProduct extends Function{
     @Override
     public double valueAt(double point){
         double value = 1;
-        for (int i = 0; i < this.functions.length; i++) {
-            value *= this.functions[i].valueAt(point);
+        for (Function function : this.functions) {
+            value *= function.valueAt(point);
         }
         return value;
     }
