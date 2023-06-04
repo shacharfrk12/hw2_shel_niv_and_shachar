@@ -1,7 +1,24 @@
 public abstract class Function {
     protected static final double epsilon = Math.pow(10, -5);
+    /**
+     * Calculates value of function at the given point
+     * @param point double value in which we want to calculate value of function
+     * @return value of function at point
+     */
     public abstract double valueAt(double point);
+    /**
+     * Calculates derivative of function
+     * @return Function - this function's derivative
+     */
     public abstract Function derivative();
+
+    /**
+     * Calculates functions root between a and b with a max error value of epsilon
+     * @param a left end of the interval
+     * @param b right end of the interval
+     * @param epsilon error range
+     * @return double value - a root of the function in range [a, b]
+     */
     public double bisectionMethod(double a, double b, double epsilon){
         double left = a;
         double right = b;
@@ -14,10 +31,23 @@ public abstract class Function {
         }
         return (left + right) / 2 ;
     }
+    /**
+     * Calculates functions root between a and b with a max error value of default epsilon defines as
+     * static class attribute
+     * @param a left end of the interval
+     * @param b right end of the interval
+     * @return double value - an estimated root of the function in range [a, b]
+     */
     public double bisectionMethod(double a, double b){
         return bisectionMethod(a, b, epsilon);
     }
 
+    /**
+     * Calculates functions root around point a with a max error value of epsilon
+     * @param a point around which to search for root
+     * @param epsilon error range
+     * @return double value - an estimated root of the function around a
+     */
     public double newtonRaphsonMethod(double a, double epsilon){
         double element = a;
         double elementValue = this.valueAt(a);
@@ -28,9 +58,21 @@ public abstract class Function {
         }
         return element;
     }
+    /**
+     * Calculates functions root around point a with a max error value of default epsilon defines as
+     *      * static class attribute
+     * @param a point around which to search for root
+     * @return double value - an estimated root of the function around a
+     */
     public double newtonRaphsonMethod(double a){
         return newtonRaphsonMethod(a, epsilon);
     }
+
+    /**
+     * taylor polynomial of function around the point zero and of degree n
+     * @param n degree of taylor polynomial
+     * @return taylor polynomial of n degree around zero
+     */
     public Polynomial taylorPolynomial(int n){
         double[] taylor = new double[n + 1] ;
         double currValue = this.valueAt(0) ;
@@ -43,6 +85,12 @@ public abstract class Function {
         }
         return new Polynomial(taylor);
     }
+
+    /**
+     * An implementation of factorial arithmetic function
+     * @param n number to calculate it's factorial
+     * @return n factorial
+     */
     public int factorial(int n){
         if(n == 0)
             return 1;

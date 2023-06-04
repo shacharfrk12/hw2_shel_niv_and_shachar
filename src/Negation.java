@@ -5,11 +5,6 @@ public class Negation extends Function{
         this.function = function;
     }
 
-    /**
-     * Calculates value of multiProduct at the given point
-     * @param point double value in which we want to calculate value of negation function
-     * @return value of function at point
-     */
     @Override
     public double valueAt(double point){
         return (-1) * this.function.valueAt(point);

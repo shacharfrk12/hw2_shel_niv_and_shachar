@@ -24,12 +24,6 @@ public class MultiProduct extends Function{
             this.functions[i] = other.functions[i];
         }
     }
-
-    /**
-     * Calculates value of multiProduct at the given point
-     * @param point double value in which we want to calculate value of multiProduct
-     * @return value of function at point
-     */
     @Override
     public double valueAt(double point){
         double value = 1;
@@ -38,11 +32,6 @@ public class MultiProduct extends Function{
         }
         return value;
     }
-
-    /**
-     * Calculates derivative of multiProduct function
-     * @return Function = this function's derivative
-     */
     public MultiSum derivative2(){
         // derivative taking first and second functions as derivatives
         MultiProduct[] firstSecond = new MultiProduct[2];
@@ -63,14 +52,18 @@ public class MultiProduct extends Function{
         }
         return new MultiSum(firstSecond[0], firstSecond[1], sumFunctions);
     }
-    //@Override
+    @Override
     public MultiSum derivative(){
+        //taking each function and multiplying its derivative with all other functions
+        //first and second functions
         Function first = this.kDerivative(0);
         Function second = this.kDerivative(1);
+        //other functions
         Function[] funcToSum = new Function[this.functions.length - 2];
         for (int i = 2; i < this.functions.length; i++) {
             funcToSum[i-2] = this.kDerivative(i);
         }
+        //sum of all multiplication
         return new MultiSum(first, second, funcToSum);
     }
     @Override
@@ -84,20 +77,28 @@ public class MultiProduct extends Function{
         return "(" + productStr + ")";
     }
 
+    /**
+     * taking a function and multiplying its derivative with all other functions
+     * @param k index of function in functions array
+     * @return multiProduct of this function's derivative with all other functions
+     */
     private MultiProduct kDerivative(int k){
         int startSame = 0;
         Function second = this.functions[0];
         Function derivativeFunc = this.functions[k].derivative();
+        // array of new functions starting from function indexes 2
         Function[] newFunctions = new Function[functions.length-2];
         if(k == 0){
             second = this.functions[1];
         }
+        //taking all functions forward until k (overriding function k)
         else if (k>=2){
             for(int i = 0; i <= k - 2;i++){
                 newFunctions[i] = this.functions[i+1];
             }
             startSame = k-1;
         }
+        //copying all functions after k
         for(int i = startSame; i < newFunctions.length; i++){
             newFunctions[i] = this.functions[i+2];
         }

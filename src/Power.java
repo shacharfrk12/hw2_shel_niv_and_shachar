@@ -6,19 +6,10 @@ public class Power extends Function{
         this.function = function;
         this.power = power;
     }
-    /**
-     * Calculates value of multiProduct at the given point
-     * @param point double value in which we want to calculate value of powe fucntion
-     * @return value of function at point
-     */
     @Override
     public double valueAt(double point){
         return Math.pow(this.function.valueAt(point), this.power);
     }
-    /**
-     * Calculates derivative of power function
-     * @return Function = this function's derivative
-     */
     @Override
     public Function derivative() {
         if (this.power == 1)
