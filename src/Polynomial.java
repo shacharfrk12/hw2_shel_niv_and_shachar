@@ -150,7 +150,6 @@ public class Polynomial extends Function {
         //for all other coefficients the variable will be x in the power of i
         return "x^" + i;
     }
-
     @Override
     public Polynomial taylorPolynomial(int n){
         // for polynomials, taylor polynomial of each degree will be identical to the
@@ -161,4 +160,5 @@ public class Polynomial extends Function {
         }
         return new Polynomial(taylor);
     }
+
 }

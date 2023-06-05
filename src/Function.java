@@ -91,10 +91,10 @@ public abstract class Function {
      * @param n number to calculate it's factorial
      * @return n factorial
      */
-    public int factorial(int n){
+    public double factorial(int n){
         if(n == 0)
             return 1;
-        int res = 1;
+        double res = 1;
         for(int i = 1; i <= n; i++){
             res *= i;
         }
